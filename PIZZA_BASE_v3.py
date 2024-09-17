@@ -1,3 +1,4 @@
+import pandas
 import time
 import sys
 from datetime import datetime, timedelta
@@ -301,39 +302,27 @@ Sizes: 330ml , 750ml, 1.5L
         else:
             print("Your pizza should be ready for pickup at around:", time_15_minutes_later.strftime("%I:%M %p"))
 
-        print()
+    all_names = ["Total Price:", "Name:", "Order:", "drink order:", "Phone Number:"]
 
-        # loading bar
-        time.sleep(0.5)
-        print("               ⣠⣤⣶⣶⣦⣄⣀")
-        time.sleep(0.5)
-        print("⠀            ⢰⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀")
-        time.sleep(0.5)
-        print("⠀    ⠀       ⢠⣷⣤⠀⠈⠙⢿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀")
-        time.sleep(0.5)
-        print("      ⠀   ⠀⠀⣠⣿⣿⣿⠆⠰⠶⠀⠘⣿⣿⣿⣿⣿⣆⠀⠀⠀")
-        time.sleep(0.5)
-        print("⠀ ⠀       ⢀⣼⣿⣿⣿⠏⠀⢀⣠⣤⣤⣀⠙⣿⣿⣿⣿⣿⣷⡀⠀")
-        time.sleep(0.5)
-        print(" ⠀     ⠀⡴⢡⣾⣿⣿⣷⠋⠁⣿⣿⣿⣿⣿⣿⣿⠃⠀⡻⣿⣿⣿⣿⡇")
-        time.sleep(0.5)
-        print("⠀⠀    ⢀⠜⠁⠸⣿⣿⣿⠟⠀⠀⠘⠿⣿⣿⣿⡿⠋⠰⠖⠱⣽⠟⠋⠉⡇")
-        time.sleep(0.5)
-        print("⠀⠀   ⡰⠉⠖⣀⠀⠀⢀⣀⠀⣴⣶⣦⠀⢴⡆⠀⠀⢀⣀⣀⣉⡽⠷⠶⠋⠀")
-        time.sleep(0.5)
-        print("⠀  ⠀⡰⢡⣾⣿⣿⣿⡄⠛⠋⠘⣿⣿⡿⠀⠀⣐⣲⣤⣯⠞⠉⠁⠀⠀⠀⠀⠀")
-        time.sleep(0.5)
-        print(" ⢀⠔⠁⣿⣿⣿⣿⣿⡟⠀⠀⠀⢀⣄⣀⡞⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀")
-        time.sleep(0.5)
-        print(" ⠀⡜⠀⠀⠻⣿⣿⠿⣻⣥⣀⡀⢠⡟⠉⠉⠀⠀⠀⠀⠀")
-        time.sleep(0.5)
-        print(" ⢰⠁⠀⡤⠖⠺⢶⡾⠃⠀⠈⠙⠋⠀⠀⠀⠀⠀")
-        time.sleep(0.5)
-        print(" ⠈⠓⠾⠇⠀⠀⠀⠀")
+    all_Can_size = [f"${cost_total}", f"{name}", f"{pizza_names[pizza_id]}", f"{drink_name}", f"{phone_num}"]
 
-if __name__ == "__main__":
-    while True:
-        main()
-        restart = yes_no("Do you want to start a new order? (yes/no): ").strip().lower()
-        if restart != "yes":
-            break
+    df = pd.DataFrame({
+        'Name': all_names,
+        'Details': all_Can_size,
+})
+
+    pd.set_option('display.max_columns', None)  # Show all columns
+    pd.set_option('display.expand_frame_repr', False)  # Prevent wrappingy
+    pd.set_option('display.max_rows', None)  # Show all rows, if needed
+
+    # Set index to start from 1
+    df.index = range(1, len(df) + 1)
+
+    print(df)
+
+    if __name__ == "__main__":
+        while True:
+            main()
+            restart = yes_no("Do you want to start a new order? (yes/no): ").strip().lower()
+            if restart != "yes":
+                break
