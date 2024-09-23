@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 import time
 import sys
 from datetime import datetime, timedelta
@@ -99,7 +99,6 @@ def main():
     time.sleep(1)
 
     # Variables
-    yes_no_options = ["yes", "no"]
     deliv_option = ["delivery", "pick up"]
     pizza_size_option = ["large", "medium", "small"]
     drink_size_option = ["330ml", "750ml", "1.5L"]
@@ -302,13 +301,12 @@ Sizes: 330ml , 750ml, 1.5L
         else:
             print("Your pizza should be ready for pickup at around:", time_15_minutes_later.strftime("%I:%M %p"))
 
-    all_names = ["Total Price:", "Name:", "Order:", "drink order:", "Phone Number:"]
-
-    all_Can_size = [f"${cost_total}", f"{name}", f"{pizza_names[pizza_id]}", f"{drink_name}", f"{phone_num}"]
+    ordered_pizzas = [f"{pizza_order_size[i]} {pizza_names[pizza_order[i]]}" for i in range(len(pizza_order))]
+    ordered_drinks = [f"{drink_order_size[i]} {drink_names[drink_order[i]]}" for i in range(len(drink_order))]
 
     df = pd.DataFrame({
-        'Name': all_names,
-        'Details': all_Can_size,
+        'Name': ordered_drinks,
+        'Details': ordered_drinks,
 })
 
     pd.set_option('display.max_columns', None)  # Show all columns
