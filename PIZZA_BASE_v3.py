@@ -28,7 +28,7 @@ def phone_num_checker(question, low, high):
 
 def p_id_num_checker(question, low, high):
     while True:
-        error = f"Please enter a valid number between {low} and {high} 🍕"
+        error = f"Please enter a valid number between {low} and {high} 🍔"
         try:
             user_response = int(input(question))
             if low <= user_response <= high:
@@ -63,11 +63,12 @@ def string_checker(question, valid_ans):
 def username_checker(question):
     error = "Whoops! Please only use letters and spaces 😬"
     while True:
-        user_name = input(question)
-        if all(char.isalpha() or char.isspace() for char in user_name):
+        user_name = input(question).strip()  # Remove leading and trailing spaces
+        if user_name and all(char.isalpha() or char.isspace() for char in user_name):
             return user_name
         else:
             print(error)
+
 
 def address_checker(question):
     error = "Please input your address again.. 🏠"
@@ -92,28 +93,28 @@ def post_code_num_checker(question):
 
 def main():
     # Welcome message
-    print("<--- 🍕 Welcome to Charman Pizzaria 🍕 --->")
+    print("<--- 🍔 Welcome to Charman Burger Joint 🍔 --->")
     time.sleep(1)
 
     # Variables
     deliv_option = ["delivery", "pick up"]
-    pizza_size_option = ["large", "medium", "small"]
+    burger_size_option = ["large", "medium", "small"]
     drink_size_option = ["330ml", "750ml", "1.5L"]
 
-    # Pizza and drink data
-    pizza_names = {
-        1: "Lamb Kebab", 2: "Crispy BBQ Pork Belly", 3: "Chicken Bacon & Aoli",
-        4: "Smokehouse Meat lover", 5: "Peri-Peri Chicken", 6: "The Lot",
-        7: "Philly Cheese Steak", 8: "Supreme", 9: "Double Bacon Cheeseburger",
-        10: "Butter Chicken", 11: "BBQ Meat lovers", 12: "Chicken Supreme",
-        13: "Cheesy Garlic Pizza", 14: "Pepperoni", 15: "Ham Cheese",
-        16: "Simply Cheese", 17: "Hawaiian", 18: "Mega Pepperoni"
+    # Burger and drink data
+    burger_names = {
+        1: "Classic Beef Burger", 2: "BBQ Bacon Burger", 3: "Cheese Lover's Burger",
+        4: "Spicy Chicken Burger", 5: "Veggie Delight", 6: "Double Beef & Cheese",
+        7: "Fish Fillet Burger", 8: "Mushroom Swiss Burger", 9: "Bacon and Egg Burger",
+        10: "Grilled Chicken Deluxe", 11: "Pulled Pork Burger", 12: "Chili Beef Burger",
+        13: "Classic Cheeseburger", 14: "Buffalo Chicken Burger", 15: "Teriyaki Burger",
+        16: "Tofu Burger", 17: "Hawaiian Chicken Burger", 18: "Triple Cheese Burger"
     }
 
     drink_names = {1: "Lift", 2: "Fanta", 3: "Coke", 4: "L & P", 5: "Sprite"}
 
-    pizza_order = []
-    pizza_order_size = []
+    burger_order = []
+    burger_order_size = []
     drink_order = []
     drink_order_size = []
 
@@ -132,51 +133,51 @@ def main():
         name = username_checker("Enter your name: ")
         phone_num = phone_num_checker("Enter your phone number: ", 100000000, 99999999999)
 
-    # Pizza order process
-    want_menu = yes_no(f"Hello {name}, would you like to see the pizza menu? ")
+    # Burger order process
+    want_menu = yes_no(f"Hello {name}, would you like to see the burger menu? ")
 
     if want_menu == "yes":
         print('''\n
 |------------MENU------------|  
 ----------------------------------------|                        
 Gourmet:                         Num id |
-Lamb Kebab                          1   |
-Crispy BBQ Pork Belly               2   | 
-Chicken Bacon & Aoli                3   |
-Smokehouse Meat lover               4   |
-Peri-Peri Chicken                   5   |
-The Lot                             6   |
+Classic Beef Burger                 1   |
+BBQ Bacon Burger                    2   | 
+Cheese Lover's Burger               3   |
+Spicy Chicken Burger                4   |
+Veggie Delight                      5   |
+Double Beef & Cheese                6   |
 ----------------------------------------|                                  
 Traditional:                            |
-Philly Cheese steak                 7   |
-Supreme                             8   |
-Double Bacon Cheeseburger           9   |
-Butter Chicken                      10  |
-BBQ Meat lovers                     11  |
-Chicken Supreme                     12  |
+Fish Fillet Burger                 7   |
+Mushroom Swiss Burger              8   |
+Bacon and Egg Burger               9   |
+Grilled Chicken Deluxe             10  |
+Pulled Pork Burger                 11  |
+Chili Beef Burger                  12  |
 ----------------------------------------|
 Value:                                  |
-Cheesy Garlic Pizza                 13  |
-Pepperoni                           14  |
-Ham Cheese                          15  |
-Simply Cheese                       16  |
-Hawaiian                            17  |
-Mega Pepperoni                      18  |
+Classic Cheeseburger               13  |
+Buffalo Chicken Burger             14  |
+Teriyaki Burger                    15  |
+Tofu Burger                        16  |
+Hawaiian Chicken Burger            17  |
+Triple Cheese Burger               18  |
 ----------------------------------------|
 Small | Medium | Large |
- $9   |   $12  |  $16  |
+ $8.99| $11.99 |$15.99 |
 ------|--------|-------|
 ''')
 
         keep_going = "yes"
         while keep_going == "yes":
-            pizza_num_id = p_id_num_checker("Enter the pizza number: ", 1, 18)
-            pizza_order.append(pizza_num_id)
-            size = string_checker("What Size | Small | Medium | Large |: ", pizza_size_option)
-            pizza_order_size.append(size)
-            pizza_name = pizza_names[pizza_num_id]
-            print(f"Great! You have selected a {size} {pizza_name} pizza.")
-            keep_going = yes_no("Do you want to order another pizza? ")
+            burger_num_id = p_id_num_checker("Enter the burger number: ", 1, 18)
+            burger_order.append(burger_num_id)
+            size = string_checker("What Size | Small | Medium | Large |: ", burger_size_option)
+            burger_order_size.append(size)
+            burger_name = burger_names[burger_num_id]
+            print(f"Great! You have selected a {size} {burger_name} burger.")
+            keep_going = yes_no("Do you want to order another burger? ")
 
     # Drink order process
     want_drink_menu = yes_no("Would you like to see the drink menu? ")
@@ -191,7 +192,9 @@ Num id | Drink           |
 4      | L & P           |
 5      | Sprite          |
 |------------------------|
-Sizes: 330ml , 750ml, 1.5L
+330ml |  750ml |  1.5L |
+$2.49 |  $3.49 | $4.99 |
+------|--------|-------|
 ''')
 
         keep_going = "yes"
@@ -205,7 +208,7 @@ Sizes: 330ml , 750ml, 1.5L
             keep_going = yes_no("Do you want to order another drink? ")
 
     # Cost calculations
-    cost_food = 8.99 * pizza_order_size.count("small") + 11.99 * pizza_order_size.count("medium") + 15.99 * pizza_order_size.count("large")
+    cost_food = 8.99 * burger_order_size.count("small") + 11.99 * burger_order_size.count("medium") + 15.99 * burger_order_size.count("large")
     cost_drinks = 2.49 * drink_order_size.count("330ml") + 3.49 * drink_order_size.count("750ml") + 4.99 * drink_order_size.count("1.5L")
     cost_total = cost_delivery + cost_food + cost_drinks
 
@@ -213,11 +216,9 @@ Sizes: 330ml , 750ml, 1.5L
     current_time = datetime.now()
     pickup_or_delivery_time = current_time + timedelta(minutes=30 if d_or_p == "delivery" else 15)
 
-    time.sleep(2)
-
     # Generate the receipt
     print("\n" + "-" * 40)
-    print("🍕 Charman Pizzaria Receipt 🍕")
+    print("🍔 Charman Burger Joint Receipt 🍔")
     print("-" * 40)
     print(f"Customer Name: {name}")
     print(f"Phone Number: {phone_num}")
@@ -225,9 +226,9 @@ Sizes: 330ml , 750ml, 1.5L
         print(f"Delivery Address: {address}")
         print(f"Post Code: {post_code}")
     print(f"Order Type: {d_or_p.capitalize()}")
-    print("\nOrdered Pizzas:")
-    for i, pizza_id in enumerate(pizza_order):
-        print(f"- {pizza_order_size[i]} {pizza_names[pizza_id]}")
+    print("\nOrdered Burgers:")
+    for i, burger_id in enumerate(burger_order):
+        print(f"- {burger_order_size[i]} {burger_names[burger_id]}")
     print("\nOrdered Drinks:")
     for i, drink_id in enumerate(drink_order):
         print(f"- {drink_order_size[i]} {drink_names[drink_id]}")
@@ -238,8 +239,16 @@ Sizes: 330ml , 750ml, 1.5L
     print(f"Total Cost: ${cost_total:.2f}")
     print(f"Estimated {d_or_p.capitalize()} Time: {pickup_or_delivery_time.strftime('%I:%M %p')}")
     print("-" * 40)
-    print("Thank you for ordering at Charman Pizzaria! Enjoy your meal! 🍕")
+    print("Thank you for ordering at Charman Burger Joint! Enjoy your meal! 🍔")
     print("-" * 40)
+
+    order_confirm = yes_no(f"Hello {name}, would you like to Confirm this Order? ")
+
+
+    if order_confirm == "yes":
+        keep_going == "yes"
+    if order_confirm == "no":
+        keep_going == "yes"
 
 if __name__ == "__main__":
     while True:
