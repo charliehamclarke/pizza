@@ -1,4 +1,4 @@
-
+import pandas as pd
 import time
 import sys
 from datetime import datetime, timedelta
@@ -137,7 +137,10 @@ def main():
     # Burger order process
     want_menu = yes_no(f"Hello {name}, would you like to see the burger menu? ")
 
+    burger_menu = pd.DataFrame(burger_names)
+
     if want_menu == "yes":
+        print(burger_menu)
         print('''\n
 |------------MENU------------|  
 ----------------------------------------|                        
